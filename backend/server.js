@@ -11,7 +11,7 @@ const app = express();
 const port = process.env.PORT || 6002;
 const allowedOrigins = [
   "http://localhost:5173", // Development
-  "https://doctalk-gnoc.onrender.com",
+  "https://doctalk-frontend-uhes.onrender.com",
 ];
 
 app.use(express.json());
