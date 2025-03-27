@@ -12,6 +12,8 @@ import {
   FaTimes,
 } from "react-icons/fa";
 import { PulseLoader } from "react-spinners";
+const API_BASE_URL =
+  import.meta.env.VITE_BACKEND_URL || "http://localhost:6002";
 
 const Login = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -39,14 +41,11 @@ const Login = ({ isOpen, onClose }) => {
     setError("");
 
     try {
-      const response = await axios.post(
-        "http://localhost:6002/api/user/login",
-        {
-          email: formData.email,
-          password: formData.password,
-          role: formData.role,
-        }
-      );
+      const response = await axios.post(`${API_BASE_URL}/api/user/login`, {
+        email: formData.email,
+        password: formData.password,
+        role: formData.role,
+      });
 
       // Store user data
       localStorage.setItem("user", JSON.stringify(response.data.user));

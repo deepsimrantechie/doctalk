@@ -14,6 +14,8 @@ import {
 } from "react-icons/fa";
 import { IoMdRefresh } from "react-icons/io";
 import assets from "../../assets/assets";
+const API_BASE_URL =
+  import.meta.env.VITE_BACKEND_URL || "http://localhost:6002";
 
 const DoctorPage = () => {
   const [doctors, setDoctors] = useState([]);
@@ -30,7 +32,7 @@ const DoctorPage = () => {
       setError(null);
       try {
         const response = await axios.get(
-          "http://localhost:6002/api/user/getAlldoctor"
+          `${API_BASE_URL}/api/user/getAlldoctor`
         );
         setDoctors(response.data);
 
@@ -62,7 +64,7 @@ const DoctorPage = () => {
     setLoading(true);
     setTimeout(() => {
       axios
-        .get("http://localhost:6002/api/user/getAlldoctor")
+        .get(`${API_BASE_URL}/api/user/getAlldoctor`)
         .then((response) => {
           setDoctors(response.data);
           setLoading(false);

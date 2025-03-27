@@ -13,6 +13,8 @@ import {
   FaTrashAlt,
 } from "react-icons/fa";
 import { IoMdRefresh } from "react-icons/io";
+const API_BASE_URL =
+  import.meta.env.VITE_BACKEND_URL || "http://localhost:6002";
 
 const DoctorsList = () => {
   const [selectedSpecialty, setSelectedSpecialty] = useState("All");
@@ -77,7 +79,7 @@ const DoctorsList = () => {
     setError(null);
     try {
       const response = await axios.get(
-        `http://localhost:6002/api/user/getAlldoctor?specialty=${selectedSpecialty}`
+        `${API_BASE_URL}/api/user/getAlldoctor?specialty=${selectedSpecialty}`
       );
       setDoctors(response.data);
     } catch (err) {

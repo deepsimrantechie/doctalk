@@ -13,6 +13,8 @@ import {
   FaEyeSlash,
 } from "react-icons/fa";
 import { PulseLoader } from "react-spinners";
+const API_BASE_URL =
+  import.meta.env.VITE_BACKEND_URL || "http://localhost:6002";
 
 const categories = [
   {
@@ -101,7 +103,7 @@ const Signup = ({ isOpen, onClose }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:6002/api/user/register",
+        `${API_BASE_URL}/api/user/register`,
         userData
       );
 

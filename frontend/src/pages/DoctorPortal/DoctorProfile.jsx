@@ -18,6 +18,8 @@ import {
 } from "react-icons/fa";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+const API_BASE_URL =
+  import.meta.env.VITE_BACKEND_URL || "http://localhost:6002";
 
 const DoctorProfile = () => {
   const { id } = useParams();
@@ -94,7 +96,7 @@ const DoctorProfile = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `http://localhost:6002/api/user/doctor/${id}`
+          `${API_BASE_URL}/api/user/doctor/${id}`
         );
         setUser(response.data);
         setFormData({
@@ -149,7 +151,7 @@ const DoctorProfile = () => {
       formDataToSend.append("isAvailable", isAvailable);
 
       const response = await axios.put(
-        `http://localhost:6002/api/user/doctor/${id}`,
+        `${API_BASE_URL}/api/user/doctor/${id}`,
         formDataToSend,
         {
           headers: { "Content-Type": "multipart/form-data" },

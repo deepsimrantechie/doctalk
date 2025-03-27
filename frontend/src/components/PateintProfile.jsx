@@ -11,6 +11,8 @@ import {
 } from "react-icons/fa";
 import { IoMdRefresh } from "react-icons/io";
 import { GiHealthNormal } from "react-icons/gi";
+const API_BASE_URL =
+  import.meta.env.VITE_BACKEND_URL || "http://localhost:6002";
 
 const PatientProfile = () => {
   const [appointments, setAppointments] = useState([]);
@@ -24,10 +26,10 @@ const PatientProfile = () => {
       try {
         const token = localStorage.getItem("token");
         const [appointmentsRes, patientRes] = await Promise.all([
-          axios.get("http://localhost:6002/api/appointment/patient", {
+          axios.get(`${API_BASE_URL}/api/appointment/patient`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          axios.get("http://localhost:6002/api/user/me", {
+          axios.get(`${API_BASE_URL}/api/user/me`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
         ]);
@@ -67,7 +69,7 @@ const PatientProfile = () => {
   const handleCancelAppointment = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:6002/api/appointment/${id}`, {
+      await axios.delete(`${API_BASE_URL}/api/appointment/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAppointments(appointments.filter((app) => app._id !== id));
@@ -83,7 +85,7 @@ const PatientProfile = () => {
     setTimeout(() => {
       const token = localStorage.getItem("token");
       axios
-        .get("http://localhost:6002/api/appointment/patient", {
+        .get(`${API_BASE_URL}/api/appointment/patient`, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => {

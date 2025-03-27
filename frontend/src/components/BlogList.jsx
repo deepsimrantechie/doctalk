@@ -9,6 +9,8 @@ import {
   FiEdit2,
 } from "react-icons/fi";
 import { FaRegNewspaper } from "react-icons/fa";
+const API_BASE_URL =
+  import.meta.env.VITE_BACKEND_URL || "http://localhost:6002";
 
 const BlogList = () => {
   const [blogs, setBlogs] = useState([]);
@@ -23,9 +25,7 @@ const BlogList = () => {
       try {
         setLoading(true);
         setError(null);
-        const response = await axios.get(
-          "http://localhost:6002/api/blog/getall"
-        );
+        const response = await axios.get(`${API_BASE_URL}/api/blog/getall`);
         setBlogs(response.data);
 
         // Extract unique categories
@@ -60,7 +60,7 @@ const BlogList = () => {
     setLoading(true);
     setTimeout(() => {
       axios
-        .get("http://localhost:6002/api/blog/getall")
+        .get(`${API_BASE_URL}/api/blog/getall`)
         .then((response) => {
           setBlogs(response.data);
           setLoading(false);

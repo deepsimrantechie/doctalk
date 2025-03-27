@@ -11,6 +11,8 @@ import {
   FaFilter,
 } from "react-icons/fa";
 import { IoMdRefresh } from "react-icons/io";
+const API_BASE_URL =
+  import.meta.env.VITE_BACKEND_URL || "http://localhost:6002";
 
 const PatientNum = () => {
   const [appointments, setAppointments] = useState([]);
@@ -29,12 +31,9 @@ const PatientNum = () => {
       setLoading(true);
       setError(null);
       const token = localStorage.getItem("token");
-      const res = await axios.get(
-        "http://localhost:6002/api/appointment/doctor",
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const res = await axios.get(`${API_BASE_URL}/api/appointment/doctor`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setAppointments(res.data);
     } catch (err) {
       console.error("Error fetching appointments:", err);

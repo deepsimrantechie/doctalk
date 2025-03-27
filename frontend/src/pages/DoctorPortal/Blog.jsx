@@ -3,8 +3,9 @@ import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiEdit2, FiTrash2, FiSend, FiX, FiPlus } from "react-icons/fi";
 
-const API_URL = "http://localhost:6002/api/blog";
 const token = localStorage.getItem("token");
+const API_BASE_URL =
+  import.meta.env.VITE_BACKEND_URL || "http://localhost:6002";
 
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
@@ -21,7 +22,7 @@ const Blog = () => {
   const fetchBlogs = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get(`${API_URL}/get`, {
+      const response = await axios.get(`${API_BASE_URL}/api/blog/get`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setBlogs(response.data.blogs);
@@ -40,7 +41,7 @@ const Blog = () => {
     setIsLoading(true);
     try {
       const response = await axios.post(
-        `${API_URL}/post`,
+        `${API_BASE_URL}/api/blog/post`,
         { title, content },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -62,7 +63,7 @@ const Blog = () => {
     setIsLoading(true);
     try {
       const response = await axios.put(
-        `${API_URL}/update/${editingBlog._id}`,
+        `${API_BASE_URL}/api/blog/update/${editingBlog._id}`,
         { title, content },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -90,7 +91,7 @@ const Blog = () => {
     }
     setIsLoading(true);
     try {
-      await axios.delete(`${API_URL}/delete/${blogId}`, {
+      await axios.delete(`${API_BASE_URL}/api/blog/delete/${blogId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setBlogs(blogs.filter((blog) => blog._id !== blogId));

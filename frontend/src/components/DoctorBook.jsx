@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+const API_BASE_URL =
+  import.meta.env.VITE_BACKEND_URL || "http://localhost:6002";
 
 const DoctorBook = () => {
   const { doctorId } = useParams();
@@ -47,9 +49,7 @@ const DoctorBook = () => {
 
     const fetchDoctor = async () => {
       try {
-        const res = await axios.get(
-          `http://localhost:6002/api/user/${doctorId}`
-        );
+        const res = await axios.get(`${API_BASE_URL}/api/user/${doctorId}`);
         setDoctor(res.data);
       } catch (err) {
         console.error("Error fetching doctor:", err);
@@ -83,7 +83,7 @@ const DoctorBook = () => {
       }
 
       const res = await axios.post(
-        `http://localhost:6002/api/appointment/book`,
+        `${API_BASE_URL}/api/appointment/book`,
         {
           doctorId,
           date: selectedDate,
