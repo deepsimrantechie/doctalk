@@ -5,9 +5,12 @@ import connectDB from "./config/db.js";
 import UserRouter from "./router/authRouter.js";
 import BlogRouter from "./router/blogRoutes.js";
 import appointmentrouter from "./router/appointmentRouter.js";
+import path from "path";
 
 configDotenv();
 const app = express();
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, "frontend/build")));
 const port = process.env.PORT || 6002;
 const allowedOrigins = [
   "http://localhost:5173", // Development
@@ -32,8 +35,9 @@ app.use("/api/user", UserRouter);
 app.use("/api/blog", BlogRouter);
 app.use("/api/appointment", appointmentrouter);
 
-app.get("/", (req, res) => {
-  res.send("Api is working find ");
+// Catch-all route to serve `index.html`
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend/build", "index.html"));
 });
 
 const startServer = () => {
