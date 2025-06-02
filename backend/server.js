@@ -5,7 +5,7 @@ import connectDB from "./config/db.js";
 import UserRouter from "./router/authRouter.js";
 import BlogRouter from "./router/blogRoutes.js";
 import appointmentrouter from "./router/appointmentRouter.js";
-import razorRouter from "./router/razorpayrouter.js";
+//import razorRouter from "./router/razorpayrouter.js";
 
 configDotenv();
 const app = express();
@@ -32,7 +32,7 @@ app.use(
 app.use("/api/user", UserRouter);
 app.use("/api/blog", BlogRouter);
 app.use("/api/appointment", appointmentrouter);
-app.use("/api/payment", razorRouter);
+//app.use("/api/payment", razorRouter);
 
 app.get("/", (req, res) => {
   res.send("Api is working find ");
