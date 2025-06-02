@@ -19,6 +19,7 @@ import PateintProfile from "./components/PateintProfile";
 import PatientNum from "./pages/DoctorPortal/PatientNum";
 import Blog from "./pages/DoctorPortal/Blog";
 import Contact from "./components/Contact";
+import Practise from "./components/Practise";
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
           element={
             <>
               <Home />
+              <Practise />
               <Collaboration />
               <Step />
               <DoctorPage />
